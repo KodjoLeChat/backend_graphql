@@ -2,6 +2,9 @@
 /dist
 /node_modules
 
+/Users/peresallaissem/perso-projects/backend_graphql/.env
+/.env
+
 # Logs
 logs
 *.log

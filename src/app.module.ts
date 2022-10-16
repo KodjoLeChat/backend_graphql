@@ -8,6 +8,8 @@ import { AppController } from './app.controller';
 import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
 import { ArticleModule } from './article/article.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -20,7 +22,7 @@ import { ArticleModule } from './article/article.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
+        type: 'mysql',
         host: configService.get('DATABASE_HOST'),
         port: parseInt(configService.get('DATABASE_PORT')),
         username: configService.get('DATABASE_USER'),
@@ -31,6 +33,8 @@ import { ArticleModule } from './article/article.module';
       }),
     }),
     ArticleModule,
+    AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
