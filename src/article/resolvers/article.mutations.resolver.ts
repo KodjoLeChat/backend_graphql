@@ -1,5 +1,6 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, UseGuards } from '@nestjs/common';
 import { Args, ID, Mutation, Resolver } from '@nestjs/graphql';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guards';
 import { ArticleService } from '../article.service';
 import {
   ArticleCreateInput,
@@ -16,6 +17,7 @@ import { Article } from '../models/article.model';
 export class ArticleMutationsResolver {
   constructor(private readonly articleService: ArticleService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Mutation(() => ArticleCreateOutput)
   async articleCreate(
     @Args('input') input: ArticleCreateInput,

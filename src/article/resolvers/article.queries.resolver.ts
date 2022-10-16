@@ -1,5 +1,7 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, UseGuards } from '@nestjs/common';
 import { Args, ID, Query, Resolver } from '@nestjs/graphql';
+import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guards';
 import { ArticleService } from '../article.service';
 import {
   ArticlesPagination,
@@ -13,6 +15,7 @@ export class ArticleQueriesResolver {
 
   private readonly limit = parseInt(process.env.LIMIT);
 
+  @UseGuards(JwtAuthGuard)
   @Query(() => ArticlesPagination)
   async articlesPagination(
     @Args() args: ArticlesPaginationArgs,

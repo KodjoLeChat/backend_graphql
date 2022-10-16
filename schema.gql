@@ -41,6 +41,24 @@ type ArticlesPagination {
   nodes: [Article!]!
 }
 
+type User {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  email: String!
+  firstName: String!
+  lastName: String!
+  avatar: String
+}
+
+type UserCreateOutput {
+  user: User!
+}
+
+type AuthLoginOutPut {
+  accessToken: String!
+}
+
 type Query {
   sayHello: String!
   articlesPagination(page: Int!, sortBy: ArticlesPaginationSortBy): ArticlesPagination!
@@ -61,6 +79,8 @@ type Mutation {
   articleCreate(input: ArticleCreateInput!): ArticleCreateOutput!
   articleUpdate(articleId: ID!, input: ArticleUpdateInput!): ArticleUpdateOutput!
   articleDelete(articleId: ID!): ArticleDeleteOutput!
+  authLogin(username: String!, password: String!): AuthLoginOutPut!
+  createUser(user: UserCreateInput!): UserCreateOutput!
 }
 
 input ArticleCreateInput {
@@ -73,4 +93,12 @@ input ArticleUpdateInput {
   title: String!
   description: String!
   image: String!
+}
+
+input UserCreateInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  avatar: String
 }
