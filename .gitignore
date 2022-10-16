@@ -3,7 +3,7 @@
 /node_modules
 
 /Users/peresallaissem/perso-projects/backend_graphql/.env
-/.env
+.env
 
 # Logs
 logs
